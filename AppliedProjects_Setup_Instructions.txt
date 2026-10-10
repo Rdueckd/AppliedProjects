@@ -1,0 +1,259 @@
+Applied Projects — Python Environment Setup
+
+This file records the basic setup for the shared Python environment used
+by the AppliedProjects repository.
+
+The virtual environment belongs at the root of AppliedProjects so that
+the stock-data and tokamak-data projects can use the same general
+scientific Python stack.
+
+1. Repository layout
+
+Expected top-level structure:
+
+AppliedProjects/ ├── .venv/ ├── .gitignore ├── requirements.txt ├──
+README.md ├── shared/ ├── StockData/ └── TokamakData/
+
+Do not create separate virtual environments inside StockData or
+TokamakData unless there is a later reason to separate their
+dependencies.
+
+2. Open the project directory
+
+In Terminal:
+
+    cd "/path/to/AppliedProjects"
+
+Replace /path/to/AppliedProjects with the actual path to the folder.
+
+3. Check the Python version
+
+MarketResearchCore requires Python 3.11 or newer.
+
+    python3 --version
+
+If this reports Python 3.11 or newer, continue.
+
+4. Create the virtual environment
+
+From the AppliedProjects root:
+
+    python3 -m venv .venv
+
+This only needs to be done once.
+
+5. Activate the virtual environment
+
+On macOS/Linux:
+
+    source .venv/bin/activate
+
+The Terminal prompt should normally show (.venv) after activation.
+
+Whenever a new Terminal session is opened, return to AppliedProjects and
+reactivate the environment:
+
+    cd "/path/to/AppliedProjects"
+    source .venv/bin/activate
+
+To leave the environment:
+
+    deactivate
+
+6. Upgrade Python packaging tools
+
+With .venv activated:
+
+    python -m pip install --upgrade pip setuptools wheel
+
+7. Install the core scientific packages
+
+    python -m pip install numpy pandas scipy matplotlib
+
+These provide the main numerical, data-analysis, statistical/scientific,
+and plotting tools.
+
+8. Install data-storage packages
+
+    python -m pip install pyarrow duckdb
+
+PyArrow supports Parquet files used by the existing stock-data
+infrastructure.
+
+DuckDB provides convenient analytical querying of tabular and Parquet
+data.
+
+9. Install the finance-specific data provider
+
+    python -m pip install yfinance
+
+This is used by the existing MarketResearchCore financial-data pipeline.
+
+It is finance-specific and should not be treated as shared tokamak
+infrastructure.
+
+10. Install Jupyter support
+
+    python -m pip install jupyterlab ipykernel
+
+Jupyter is useful for exploratory analysis. Scripts should still be
+preferred when an analysis needs to be reproducible as part of the
+project.
+
+To start JupyterLab:
+
+    jupyter lab
+
+11. Verify the installation
+
+Run:
+
+    python --version
+
+Then:
+
+    python -c "import numpy, pandas, scipy, matplotlib, pyarrow, duckdb, yfinance; print('Environment OK')"
+
+If the command prints:
+
+    Environment OK
+
+the main environment is working.
+
+12. Record installed packages
+
+After setting up or deliberately changing the environment:
+
+    python -m pip freeze > requirements.txt
+
+The requirements.txt file should be kept in the AppliedProjects
+repository.
+
+To recreate the environment later from requirements.txt:
+
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
+
+13. Root .gitignore
+
+At minimum, the root .gitignore should contain:
+
+    .venv/
+    __pycache__/
+    *.pyc
+    .DS_Store
+    .env
+
+Large generated datasets should generally not be committed to Git.
+
+In particular, be careful with:
+
+    *.parquet
+    *.duckdb
+
+Whether these extensions should be ignored globally depends on whether
+the repository later contains small example datasets that are
+intentionally version-controlled. Raw or large generated datasets should
+stay out of Git.
+
+14. Adding new packages
+
+Always activate .venv first:
+
+    source .venv/bin/activate
+
+Then install the package:
+
+    python -m pip install PACKAGE_NAME
+
+After intentionally changing the project’s dependencies, update the
+recorded environment:
+
+    python -m pip freeze > requirements.txt
+
+Do not install packages merely because they might eventually be useful.
+
+15. Tokamak-specific dependencies
+
+Do not install tokamak-specific packages until the first dataset and
+data format have been selected.
+
+The initial scientific stack already provides:
+
+-   NumPy
+-   pandas
+-   SciPy
+-   Matplotlib
+-   PyArrow
+-   DuckDB
+-   JupyterLab
+
+Depending on the eventual tokamak dataset, additional support may be
+needed for formats or systems such as HDF5, NetCDF, MDSplus, or IMAS.
+Add these only when the project actually requires them.
+
+16. Routine startup
+
+For ordinary work after the initial setup:
+
+    cd "/path/to/AppliedProjects"
+    source .venv/bin/activate
+
+Then move into the relevant project directory and run the desired Python
+script.
+
+Example:
+
+    cd StockData
+    python path/to/script.py
+
+17. Useful environment checks
+
+Show the active Python executable:
+
+    which python
+
+Show the active pip executable:
+
+    which pip
+
+List installed packages:
+
+    python -m pip list
+
+Check a specific package:
+
+    python -m pip show pandas
+
+Show the exact Python version:
+
+    python --version
+
+When .venv is active, which python should point somewhere inside:
+
+    AppliedProjects/.venv/
+
+18. Current package set
+
+General scientific/data tools:
+
+    numpy
+    pandas
+    scipy
+    matplotlib
+    pyarrow
+    duckdb
+
+Finance-specific:
+
+    yfinance
+
+Development/exploration:
+
+    jupyterlab
+    ipykernel
+
+Additional dependencies should be added as the projects require them
+rather than pre-installing a large scientific stack.
