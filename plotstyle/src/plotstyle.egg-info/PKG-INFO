@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: plotstyle
+Version: 0.1.0
+Summary: House matplotlib styles for LaTeX and the web, light and dark
+Requires-Python: >=3.9
+Requires-Dist: matplotlib>=3.7

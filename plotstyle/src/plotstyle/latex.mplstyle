@@ -1,0 +1,15 @@
+# For figures included in LaTeX documents.
+# Computer Modern text and maths so labels match the surrounding document.
+
+font.family:      serif
+font.serif:       CMU Serif, Computer Modern Roman, DejaVu Serif
+mathtext.fontset: cm
+axes.formatter.use_mathtext: True
+
+# Embed fonts as TrueType (Type 42) rather than Type 3; journals and
+# arXiv prefer it and text stays selectable.
+pdf.fonttype: 42
+ps.fonttype:  42
+
+# Set to True for exact LaTeX rendering (needs a TeX install; slower).
+text.usetex: False

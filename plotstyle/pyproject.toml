@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plotstyle"
+version = "0.1.0"
+description = "House matplotlib styles for LaTeX and the web, light and dark"
+requires-python = ">=3.9"
+dependencies = ["matplotlib>=3.7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+plotstyle = ["*.mplstyle"]

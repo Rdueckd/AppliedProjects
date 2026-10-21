@@ -1,0 +1,35 @@
+# Shared layout: no colours, no fonts. Combine with a target and a theme.
+
+figure.figsize:              6.4, 4.0
+figure.dpi:                  110
+figure.constrained_layout.use: True
+
+font.size:        11
+axes.labelsize:   11
+axes.titlesize:   12
+legend.fontsize:  10
+xtick.labelsize:  10
+ytick.labelsize:  10
+
+axes.spines.top:   False
+axes.spines.right: False
+axes.linewidth:    0.8
+axes.grid:         True
+grid.linewidth:    0.6
+grid.alpha:        0.25
+
+xtick.direction:   out
+ytick.direction:   out
+xtick.major.size:  3.5
+ytick.major.size:  3.5
+xtick.major.width: 0.8
+ytick.major.width: 0.8
+
+lines.linewidth:   1.8
+lines.markersize:  5
+
+legend.frameon:    False
+
+savefig.dpi:       300
+savefig.bbox:      tight
+savefig.pad_inches: 0.03

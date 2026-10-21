@@ -1,0 +1,15 @@
+# Light theme. Okabe-Ito palette (colour-blind safe).
+
+axes.prop_cycle: cycler('color', ['0072B2', 'E69F00', '009E73', 'D55E00', 'CC79A7', '56B4E9', 'F0E442', '000000'])
+
+figure.facecolor:  white
+axes.facecolor:    white
+savefig.facecolor: white
+
+text.color:        222222
+axes.labelcolor:   222222
+axes.edgecolor:    444444
+xtick.color:       444444
+ytick.color:       444444
+grid.color:        888888
+legend.labelcolor: 222222

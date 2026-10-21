@@ -1,0 +1,17 @@
+# For figures on the website (Verdana body text).
+
+font.family:      sans-serif
+font.sans-serif:  Verdana, DejaVu Sans, Bitstream Vera Sans, sans-serif
+mathtext.fontset: dejavusans
+
+# Verdana is wide; slightly smaller sizes keep tick labels from crowding.
+font.size:        10
+axes.labelsize:   10
+axes.titlesize:   11
+legend.fontsize:  9
+xtick.labelsize:  9
+ytick.labelsize:  9
+
+# Keep text as real text in SVGs, so the browser draws it in the site's own
+# Verdana even if Verdana isn't installed where the plot was made.
+svg.fonttype: none

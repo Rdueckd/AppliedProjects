@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/plotstyle/__init__.py
+src/plotstyle/base.mplstyle
+src/plotstyle/dark.mplstyle
+src/plotstyle/latex.mplstyle
+src/plotstyle/light.mplstyle
+src/plotstyle/web.mplstyle
+src/plotstyle.egg-info/PKG-INFO
+src/plotstyle.egg-info/SOURCES.txt
+src/plotstyle.egg-info/dependency_links.txt
+src/plotstyle.egg-info/requires.txt
+src/plotstyle.egg-info/top_level.txt
