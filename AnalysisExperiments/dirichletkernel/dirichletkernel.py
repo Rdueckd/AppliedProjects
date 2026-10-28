@@ -5,8 +5,8 @@ def dirchkern(a,b, N, res):
 
     Dn = np.sin((N+1/2)*x)/(np.sin(x/2)*2*np.pi)
 
-    Dn[0] = (2N+1) / (2*np.pi)
-    return Dn
+    Dn[0] = (2*N+1) / (2*np.pi)
+    return x, Dn
 
 
 def dirchkernsum(a,b,N,res):
@@ -16,4 +16,4 @@ def dirchkernsum(a,b,N,res):
     for n in range(0,N):
         Dn += np.cos(n*x)
 
-    return Dn / np.pi
+    return x, Dn / np.pi

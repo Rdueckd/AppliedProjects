@@ -110,5 +110,5 @@ def render(make, name, versions=DEFAULT_RENDERS, formats=None):
     for target, theme in versions:
         with context(target, theme):
             fig = make()
-            written += save(fig, f"{name}_{target}_{theme}", formats, close=True)
+            written += save(fig, f"{name}-{target}-{theme}", formats, close=True)
     return written
