@@ -6,15 +6,30 @@ from randomwalk import discretewalk, continuous2dwalk
 
 # discretedir = Path("plots/discrete/distance")
 
-def distdiscrete2d(nsteps):
+def distdiscrete(nsteps, dim=2):
+    """Create graphs of the distance from the origin for a discrete randome walk in either one, two or three dimensions."""
+    if dim < 1 or dim > 3:
+        print("Valid only for dimensions 2 and 3")
+        return
     x = np.linspace(0,nsteps, nsteps+1, dtype=int)
-    p,w,d = discretewalk(2,nsteps=nsteps)
+    p,w,d = discretewalk(dim,nsteps=nsteps)
     plt.plot(x,d, marker='o',linestyle='dashed')
     plt.grid(True)
-    plt.title(f"Distance From Origin, 2-D Discrete {nsteps} Steps")
-    plt.savefig(f"plots/discrete/2d/distance/2ddiscrete{nsteps}.png")
+    plt.xlabel("Number of Steps")
+    plt.ylabel("Distance from Origin")
+    if dim == 1:
+        plt.title(f"Distance From Origin, 1-D Discrete {nsteps} Steps")
+        plt.savefig(f"plots/discrete/1d/distance/1ddiscdist{nsteps}.png")
+    elif dim == 2:
+        plt.title(f"Distance From Origin, 2-D Discrete {nsteps} Steps")
+        plt.savefig(f"plots/discrete/2d/distance/2ddiscdist{nsteps}.png")
+    else:
+        plt.title(f"Distance From Origin, 3-D Discrete {nsteps} Steps")
+        plt.savefig(f"plots/discrete/3d/distance/3ddiscdist{nsteps}.png")
+    plt.close()
 
 def discrete2d(nsteps):
+    """Create a plot for a discrete two dimensional random walk."""
     p, w, d = discretewalk(2, nsteps=nsteps)
     w = np.asarray(w)
     fig, ax = plt.subplots()
@@ -35,6 +50,7 @@ def discrete2d(nsteps):
     plt.close(fig)
 
 def discrete3d(nsteps):
+    """Create a plot for a discrete three dimensional random walk."""
     p, w, d = discretewalk(3, nsteps=nsteps)
     w = np.asarray(w)
     x, y, z = w.T
@@ -57,6 +73,7 @@ def discrete3d(nsteps):
     plt.close(fig)
 
 def continuous2dplot(nsteps,dx):
+    """Create a plot for an approximatedly continuous two dimensional random walk. For better approximations, dx should be proportional to nsteps."""
     p, w, d = continuous2dwalk(nsteps,dx)
     w = np.asarray(w)
     fig, ax = plt.subplots()
