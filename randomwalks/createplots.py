@@ -6,17 +6,36 @@ from randomwalk import discretewalk, continuous2dwalk
 
 # discretedir = Path("plots/discrete/distance")
 
-def distdiscrete(nsteps, dim=2):
+def returnstoO(d):
+    """Given the vector of distances from the origin from a random walk, counts the returns to zero."""
+    nonO = len(np.flatnonzero(d))
+    return len(d) - nonO - 1
+
+def distdiscrete(nsteps, dim=2): # in the future it may make more sense to create 'plot functions' which take in data so that the data only has to be generated once.
     """Create graphs of the distance from the origin for a discrete randome walk in either one, two or three dimensions."""
     if dim < 1 or dim > 3:
         print("Valid only for dimensions 2 and 3")
         return
+    ms = 2
+    if nsteps > 40:
+        ms = 1
+    ls = 'dashed'
+    if nsteps > 40:
+        ls = 'solid'
+    lw = 1.0
+    if nsteps > 99:
+        lw = 0.8
     x = np.linspace(0,nsteps, nsteps+1, dtype=int)
     p,w,d = discretewalk(dim,nsteps=nsteps)
-    plt.plot(x,d, marker='o',linestyle='dashed')
-    plt.grid(True)
-    plt.xlabel("Number of Steps")
-    plt.ylabel("Distance from Origin")
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.plot(x,d, marker='o',linestyle=ls,markersize=ms,linewidth=lw)
+    ax.grid(True)
+    ax.set_xlabel("Number of Steps")
+    ax.set_ylabel("Distance from Origin")
+    ax.text(0.05, 0.95, f"Returns to origin: {returnstoO(d)}",
+            transform=ax.transAxes, ha="left", va="top")
+
     if dim == 1:
         plt.title(f"Distance From Origin, 1-D Discrete {nsteps} Steps")
         plt.savefig(f"plots/discrete/1d/distance/1ddiscdist{nsteps}.png")
@@ -27,6 +46,12 @@ def distdiscrete(nsteps, dim=2):
         plt.title(f"Distance From Origin, 3-D Discrete {nsteps} Steps")
         plt.savefig(f"plots/discrete/3d/distance/3ddiscdist{nsteps}.png")
     plt.close()
+
+def distalldims(nsteps):
+    """Create plots for the distance from the origin at all distances."""
+    for dim in range(1,4):
+        distdiscrete(nsteps,dim)
+
 
 def discrete2d(nsteps):
     """Create a plot for a discrete two dimensional random walk."""
